@@ -665,8 +665,8 @@ Class LogFile : LogDocument {
         write-warning "PsScriptRoot: $($sr)"
         $execPath = Split-Path -parent $global:ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath(".\")
         write-warning "ExecutionContext: $($execPath)"
-        $InvocationParentPath = Split-Path $global:MyInvocation.MyCommand.Path -parent
-        write-warning "MyInvocationParentPath: $($InvocationParentPath)" 
+        #$InvocationParentPath = Split-Path $global:MyInvocation.MyCommand.Path -parent
+        #write-warning "MyInvocationParentPath: $($InvocationParentPath)" 
         $InvocationPath = $global:MyInvocation.MyCommand.Path
         write-warning "MyInvocationPath: $($InvocationPath)" 
         $stack = Get-PSCallStack
@@ -680,7 +680,9 @@ Class LogFile : LogDocument {
         }else{
 
             $cp = (Get-PSCallStack)[-1].ScriptName #$PSCommandPath #Split-Path -parent $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath(�.\�) #$PSCommandPath
+            $cp = $global:MyInvocation.MyCommand.Definition #fix for Ubuntu appveyor machines.
         }
+        
         $CallStack = Get-PSCallStack
         $count = 0
 

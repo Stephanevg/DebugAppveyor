@@ -685,7 +685,7 @@ Class LogFile : LogDocument {
         
         $CallStack = Get-PSCallStack
         $count = 0
-
+        $cp = $global:MyInvocation.MyCommand.Definition 
         write-warning "Iterating thorugh the PSCallStack:"
         foreach($s in $CallStack){
             write-warning "  [$($count)]$($s.command)"

@@ -660,15 +660,15 @@ Class LogFile : LogDocument {
         $PSCommandPath = $PSCommandPath
         $location = (Get-Location).Path
         $sr = $psScriptRoot
-        write-verbose "CommandPAth: $($PsCommandPath)"
-        write-verbose "CurrentInvocationDEfinition: $($global:MyInvocation.MyCommand.Definition )"
-        write-verbose "PsScriptRoot: $($sr)"
+        write-warning "CommandPAth: $($PsCommandPath)"
+        write-warning "CurrentInvocationDEfinition: $($global:MyInvocation.MyCommand.Definition )"
+        write-warning "PsScriptRoot: $($sr)"
         $execPath = Split-Path -parent $global:ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath(".\")
-        write-verbose "ExecutionContext: $($execPath)"
+        write-warning "ExecutionContext: $($execPath)"
         $InvocationParentPath = Split-Path $global:MyInvocation.MyCommand.Path -parent
-        write-verbose "MyInvocationParentPath: $($InvocationParentPath)" 
+        write-warning "MyInvocationParentPath: $($InvocationParentPath)" 
         $InvocationPath = $global:MyInvocation.MyCommand.Path
-        write-verbose "MyInvocationPath: $($InvocationPath)" 
+        write-warning "MyInvocationPath: $($InvocationPath)" 
         $stack = Get-PSCallStack
         If($stack.Location -eq "<No File>"){
             if(($stack | measure).Count -ge 2){
@@ -684,9 +684,9 @@ Class LogFile : LogDocument {
         $CallStack = Get-PSCallStack
         $count = 0
 
-        write-verbose "Iterating thorugh the PSCallStack:"
+        write-warning "Iterating thorugh the PSCallStack:"
         foreach($s in $CallStack){
-            write-verbose "  [$($count)]$($s.command)"
+            write-warning "  [$($count)]$($s.command)"
             $count++
         }
         

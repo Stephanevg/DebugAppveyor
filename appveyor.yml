@@ -10,7 +10,7 @@ build_script:
     write-host "Skipping build"
 test_script:
 - ps: >-
-    .\CI\04_Tests.ps1
+    .\CI\04_tests.ps1
 
 skip_commits:
   files:

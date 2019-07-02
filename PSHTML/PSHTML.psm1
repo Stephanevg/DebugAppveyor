@@ -659,9 +659,12 @@ Class LogFile : LogDocument {
         $CurrentInvocation = $MyInvocation.MyCommand.Definition 
         $PSCommandPath = $PSCommandPath
         $location = (Get-Location).Path
-       
-
-
+        $sr = $psScriptRoot
+        write-verbose "CommandPAth: $($PsCommandPath)"
+        write-verbose "CurrentInvocationDEfinition: $($MyInvocation.MyCommand.Definition )"
+        write-verbose "PsScriptRoot: $($sr)"
+        write-verbose "ExecutionContext: {0}" -f (Split-Path -parent $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath(".\"))
+        write-verbose "MyInvocationPath: {0}" Split-Path $MyInvocation.MyCommand.Path -parent
         $stack = Get-PSCallStack
         If($stack.Location -eq "<No File>"){
             if(($stack | measure).Count -ge 2){
@@ -674,7 +677,14 @@ Class LogFile : LogDocument {
 
             $cp = (Get-PSCallStack)[-1].ScriptName #$PSCommandPath #Split-Path -parent $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath(�.\�) #$PSCommandPath
         }
+        $CallStack = Get-PSCallStack
+        $count = 0
 
+        write-vebose "Iterating thorugh the PSCallStack:"
+        foreach($s in $CallStack){
+            write-verbose "  [$($count)]$($s.command)"
+        }
+        
         
         $sr = $psScriptRoot
         

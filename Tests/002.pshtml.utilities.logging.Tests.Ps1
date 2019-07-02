@@ -1,5 +1,5 @@
 $TestsPath = Split-Path $MyInvocation.MyCommand.Path
-
+$VerbosePreference = "Continue"
 #$FunctionsPath = join-Path -Path (get-item $TestsPath).Parent -ChildPath "Functions"
 
 $RootFolder = (get-item $TestsPath).Parent
@@ -17,7 +17,6 @@ InModuleScope -ModuleName PSHTML {
     Describe '[LogFile]-[Constructors]' {
     
         It '[LogFile]-[Constructor] - Parameterless - should Not Throw' {
-            Get-PSCallStack
 
             { [LogFile]::New() } | Should not throw
     

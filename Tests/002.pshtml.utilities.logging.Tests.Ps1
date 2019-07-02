@@ -17,7 +17,8 @@ InModuleScope -ModuleName PSHTML {
     Describe '[LogFile]-[Constructors]' {
     
         It '[LogFile]-[Constructor] - Parameterless - should Not Throw' {
-    
+            Get-PSCallStack
+
             { [LogFile]::New() } | Should not throw
     
         } #End of it block
